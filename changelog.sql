@@ -1,4 +1,4 @@
--- liquibase formatted sql
+-- liquibase formatted sql changeLogId:801204f4-7e7d-4f93-9c83-83f7a1d02e06
 
 -- changeset SteveZ:1588216 context:"qa and dev" labels:Jira1000,Jira1001
 CREATE TABLE department 
