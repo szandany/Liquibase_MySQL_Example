@@ -45,4 +45,4 @@ jobs:
           
           $Env:Path += ";C:\apps\liquibase"
           liquibase --version
-          liquibase --changelog-file=changelog.sql status --verbose
+          liquibase status --verbose
