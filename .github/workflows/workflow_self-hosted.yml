@@ -41,7 +41,9 @@ jobs:
           $Env:LIQUIBASE_COMMAND_USERNAME="${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
           $Env:LIQUIBASE_COMMAND_PASSWORD="${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
           $Env:LIQUIBASE_COMMAND_CHANGELOG_FILE="${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
-          
+          $Env:LIQUIBASE_COMMAND_CHECKS_RUN_CHECKS_SETTINGS_FILE="${{ secrets.LIQUIBASE_COMMAND_CHECKS_RUN_CHECKS_SETTINGS_FILE }}"
           $Env:Path += ";C:\apps\liquibase"
+          
+          
           liquibase --version
-          liquibase status --verbose
+          liquibase --changelog-file=changelog.sql status --verbose
