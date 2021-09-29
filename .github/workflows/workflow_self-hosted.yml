@@ -41,7 +41,6 @@ jobs:
           $Env:LIQUIBASE_COMMAND_USERNAME="${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
           $Env:LIQUIBASE_COMMAND_PASSWORD="${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
           $Env:LIQUIBASE_COMMAND_CHANGELOG_FILE="${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
-          $Env:LIQUIBASE_COMMAND_USERNAME="${{ secrets.LIQUIBASE_PRO_LICENSE_KEY }}"
           
           $Env:Path += ";C:\apps\liquibase"
           liquibase --version
