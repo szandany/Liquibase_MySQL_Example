@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Liquibase_CLI_GitHub-Hosted
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  workflow_dispatch:
+   inputs:
+      logLevel:
+        description: 'Log level'     
+        required: false
+        default: 'severe'
+      
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  LBJobCLI:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      
+      - name: RunLiquibaseCLICommands
+        uses: actions/checkout@v2
+      
+      # Runs a set of commands using the runners shell
+
+      - run: |
+          $Env:Path += ";C:\apps\liquibase"
+          liquibase --version
+          # ./liquibase/liquibase --defaultsFile=./H2_project/liquibase.properties --liquibaseHubApiKey="${{ github.event.inputs.liquibaseHubApiKey }}" --liquibaseProLicenseKey="${{ github.event.inputs.liquibaseProLicenseKey }}" --logLevel="${{ github.event.inputs.logLevel }}" status --verbose
+          # ./liquibase/liquibase --defaultsFile=./H2_project/liquibase.properties --liquibaseHubApiKey="${{ github.event.inputs.liquibaseHubApiKey }}" --liquibaseProLicenseKey="${{ github.event.inputs.liquibaseProLicenseKey }}" --logLevel="${{ github.event.inputs.logLevel }}" updateSQL
+          # ./liquibase/liquibase --defaultsFile=./H2_project/liquibase.properties --liquibaseHubApiKey="${{ github.event.inputs.liquibaseHubApiKey }}" --liquibaseProLicenseKey="${{ github.event.inputs.liquibaseProLicenseKey }}" --logLevel="${{ github.event.inputs.logLevel }}" update
