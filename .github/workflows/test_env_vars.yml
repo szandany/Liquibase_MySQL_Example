@@ -27,7 +27,7 @@ jobs:
       name: DEV
 
     steps:
-      - name: Set Liquibase
+      - name: Build with Liquibase
         uses: actions/checkout@v2
       - run: |
           curl -L https://github.com/liquibase/liquibase/releases/download/v${LB_VERSION}/liquibase-${LB_VERSION}.zip --output liquibase-${LB_VERSION}.zip
@@ -37,8 +37,22 @@ jobs:
           echo "${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
-      
-      - name: Build with Liquibase
+          ./liquibase/liquibase --version
+    
+  Test_Job:
+    runs-on: ubuntu-latest
+    environment: 
+      name: TEST
+
+    steps:
+      - name: Test with Liquibase
         uses: actions/checkout@v2
       - run: |
+          curl -L https://github.com/liquibase/liquibase/releases/download/v${LB_VERSION}/liquibase-${LB_VERSION}.zip --output liquibase-${LB_VERSION}.zip
+          unzip -o -d liquibase liquibase-${LB_VERSION}.zip
+          export LIQUIBASE_PRO_LICENSE_KEY="${{ secrets.LIQUIBASE_PRO_LICENSE_KEY }}"
+          echo "${{ secrets.LIQUIBASE_COMMAND_URL }}"
+          echo "${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
+          echo "${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
+          echo "${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
           ./liquibase/liquibase --version
