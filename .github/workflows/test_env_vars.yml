@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  LBJobCLI:
+  Build_Job:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     
@@ -33,13 +33,12 @@ jobs:
       - run: |
           curl -L https://github.com/liquibase/liquibase/releases/download/v${LB_VERSION}/liquibase-${LB_VERSION}.zip --output liquibase-${LB_VERSION}.zip
           unzip -o -d liquibase liquibase-${LB_VERSION}.zip
-          ./liquibase/liquibase --version
-          echo "${{ secrets.LIQUIBASE_PRO_LICENSE_KEY }}"
+          export LIQUIBASE_PRO_LICENSE_KEY="${{ secrets.LIQUIBASE_PRO_LICENSE_KEY }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_URL }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
-          echo "${{ secrets.LIQUIBASE_HUB_API_KEY }}"
+          ./liquibase/liquibase --version
           
         env:
             user.email: "<email>"
