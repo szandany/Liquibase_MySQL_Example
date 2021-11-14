@@ -12,6 +12,13 @@ on:
 #     branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+env:
+    user.email: "<email>"
+    user.name: "<username>"
+    message: "<enter commit message>"
+    branch: "<git branch name>"
+    LB_VERSION: "4.6.1"
+
 jobs:
 
   Build_Job:
@@ -35,11 +42,3 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           ./liquibase/liquibase --version
-        
-        
-        env:
-            user.email: "<email>"
-            user.name: "<username>"
-            message: "<enter commit message>"
-            branch: "<git branch name>"
-            LB_VERSION: "4.6.1"
