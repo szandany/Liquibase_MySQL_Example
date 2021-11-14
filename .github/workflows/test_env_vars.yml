@@ -15,21 +15,13 @@ on:
 jobs:
 
   Build_Job:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
     environment: 
       name: DEV
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      
-      - name: RunLiquibaseCLICommands
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Set Liquibase
         uses: actions/checkout@v2
-      
-      # Runs a set of commands using the runners shell
-
       - run: |
           curl -L https://github.com/liquibase/liquibase/releases/download/v${LB_VERSION}/liquibase-${LB_VERSION}.zip --output liquibase-${LB_VERSION}.zip
           unzip -o -d liquibase liquibase-${LB_VERSION}.zip
@@ -38,8 +30,13 @@ jobs:
           echo "${{ secrets.LIQUIBASE_COMMAND_USERNAME }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_PASSWORD }}"
           echo "${{ secrets.LIQUIBASE_COMMAND_CHANGELOG_FILE }}"
+      
+      - name: Build with Liquibase
+        uses: actions/checkout@v2
+      - run: |
           ./liquibase/liquibase --version
-          
+        
+        
         env:
             user.email: "<email>"
             user.name: "<username>"
