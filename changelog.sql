@@ -47,22 +47,4 @@ CREATE TABLE shop (
     ;
 --rollback drop table shop;
     
---changeset SteveZ:1588216758
-INSERT INTO shop VALUES
-    (1,'A',3.45),(1,'B',3.99),(2,'A',10.99),(3,'B',1.45),
-    (3,'C',1.69),(3,'D',1.25),(4,'D',19.95);   
---rollback DELETE FROM shop WHERE article=1;
---rollback DELETE FROM shop WHERE article=2;
---rollback DELETE FROM shop WHERE article=3;
---rollback DELETE FROM shop WHERE article=4;
-
---changeset BobR:5_456 endDelimiter:#
-DROP PROCEDURE IF EXISTS get_shopcount;
-#
-CREATE PROCEDURE get_shopcount()
-BEGIN
-Select count(*) from shop1;
-END
-#
---rollback DROP PROCEDURE IF EXISTS get_shopcount;
 
