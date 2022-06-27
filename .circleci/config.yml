@@ -8,4 +8,8 @@ jobs:
     machine: true
     resource_class: szandany/liquibase
     steps:
-      - run: echo "Hi I'm on Runners!"
+      - run: |
+          echo "Hi I'm on Runners!"
+          whoami
+          ls
+          pwd
