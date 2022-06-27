@@ -10,4 +10,5 @@ jobs:
     steps:
       - run: |
           echo "Hi I'm on Runners!"
-          liquibase
+          liquibase -v
+          liquibase -h
